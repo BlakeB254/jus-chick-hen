@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X, Phone } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { brand } from "@/config/brand";
@@ -29,7 +30,18 @@ export function StorefrontNavbar() {
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 md:px-8">
         {/* Logo / Brand Name */}
         <Link href="/" className="flex items-center gap-2">
-          <span className="font-display text-2xl font-bold tracking-tight text-brand-red">
+          <Image
+            src="/logo.jpg"
+            alt="Jus Chick-Hen"
+            width={44}
+            height={44}
+            className="rounded-full"
+            priority
+          />
+          <span className={cn(
+            "font-display text-xl font-bold tracking-tight transition-colors hidden sm:inline",
+            scrolled ? "text-brand-red" : "text-white"
+          )}>
             Jus Chick-Hen
           </span>
         </Link>

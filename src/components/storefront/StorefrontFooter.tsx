@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Instagram, Facebook, MapPin, Phone, Clock, ExternalLink } from "lucide-react";
 import { brand } from "@/config/brand";
 
@@ -17,8 +18,9 @@ export function StorefrontFooter() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand Column */}
           <div>
-            <Link href="/" className="font-display text-2xl font-bold text-brand-gold">
-              Jus Chick-Hen
+            <Link href="/" className="flex items-center gap-2">
+              <Image src="/logo.jpg" alt="Jus Chick-Hen" width={40} height={40} className="rounded-full" />
+              <span className="font-display text-2xl font-bold text-brand-gold">Jus Chick-Hen</span>
             </Link>
             <p className="mt-3 text-white/60 text-sm leading-relaxed">
               {brand.tagline}

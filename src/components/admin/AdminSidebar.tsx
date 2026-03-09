@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, ClipboardList, UtensilsCrossed, Settings, LogOut, ChefHat, Menu, X } from "lucide-react";
+import { LayoutDashboard, ClipboardList, UtensilsCrossed, Settings, LogOut, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 
@@ -26,7 +27,7 @@ export function AdminSidebar() {
     <div className="flex h-full flex-col">
       {/* Brand */}
       <div className="flex items-center gap-2 px-4 py-5 border-b border-gray-200">
-        <ChefHat size={24} className="text-brand-red" />
+        <Image src="/logo.jpg" alt="Jus Chick-Hen" width={32} height={32} className="rounded-full" />
         <span className="font-bold text-lg">Admin</span>
       </div>
 
