@@ -12,7 +12,7 @@ export function HeroSection() {
       <div className="absolute inset-0 hero-overlay" />
 
       {/* Decorative floating elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
         <motion.div
           className="absolute top-[15%] left-[10%] text-6xl opacity-20"
           animate={{ y: [0, -20, 0], rotate: [0, 10, 0] }}

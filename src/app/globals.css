@@ -227,6 +227,14 @@
   animation: slide-in-right 0.3s ease-out both;
 }
 
+@keyframes badge-bounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+}
+.animate-badge-bounce {
+  animation: badge-bounce 0.3s ease-in-out;
+}
+
 @keyframes pulse-glow {
   0%, 100% {
     box-shadow: 0 0 20px rgba(204, 0, 0, 0.3);
@@ -283,7 +291,8 @@
   .animate-fade-in-up,
   .animate-scale-in,
   .animate-slide-in-right,
-  .animate-pulse-glow {
+  .animate-pulse-glow,
+  .animate-badge-bounce {
     animation: none !important;
   }
   .btn-cta:hover,

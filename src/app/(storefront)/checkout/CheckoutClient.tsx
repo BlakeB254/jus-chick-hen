@@ -29,6 +29,8 @@ export function CheckoutClient() {
   const [deliveryCheck, setDeliveryCheck] = useState<DeliveryCheckResult | null>(null);
   const [checkingDelivery, setCheckingDelivery] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [orderError, setOrderError] = useState("");
 
   const handleTypeChange = (type: OrderType) => {
     setOrderType(type);
@@ -59,6 +61,9 @@ export function CheckoutClient() {
   };
 
   const handleSubmit = async () => {
+    setSubmitted(true);
+    setOrderError("");
+
     if (!name.trim() || !phone.trim()) return;
     if (orderType === "delivery" && !deliveryCheck?.available) return;
 
@@ -91,7 +96,7 @@ export function CheckoutClient() {
         router.push(`/order-confirmation?id=${data.id}`);
       }
     } catch {
-      alert("Error placing order. Please try again.");
+      setOrderError("Something went wrong placing your order. Please try again.");
     }
     setSubmitting(false);
   };
@@ -116,6 +121,12 @@ export function CheckoutClient() {
         </Link>
 
         <h1 className="text-2xl font-bold mb-6">Checkout</h1>
+
+        {orderError && (
+          <div className="mb-6 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+            {orderError}
+          </div>
+        )}
 
         {/* Order type toggle */}
         <div className="grid grid-cols-2 gap-3 mb-6">
@@ -198,6 +209,10 @@ export function CheckoutClient() {
                 )}
               </div>
             )}
+
+            {submitted && !deliveryCheck && (
+              <p className="mt-3 text-sm text-red-600">Please check your delivery address above</p>
+            )}
           </div>
         )}
 
@@ -205,22 +220,36 @@ export function CheckoutClient() {
         <div className="rounded-xl border border-border bg-white p-4 mb-6">
           <h2 className="font-semibold mb-3">Your Information</h2>
           <div className="space-y-3">
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Full Name *"
-              className="w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-brand-red"
-              required
-            />
-            <input
-              type="tel"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              placeholder="Phone Number *"
-              className="w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-brand-red"
-              required
-            />
+            <div>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Full Name *"
+                className={`w-full rounded-lg border bg-background px-3 py-2.5 text-sm outline-none focus:border-brand-red ${
+                  submitted && !name.trim() ? "border-red-500" : "border-border"
+                }`}
+                required
+              />
+              {submitted && !name.trim() && (
+                <p className="mt-1 text-xs text-red-600">Name is required</p>
+              )}
+            </div>
+            <div>
+              <input
+                type="tel"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                placeholder="Phone Number *"
+                className={`w-full rounded-lg border bg-background px-3 py-2.5 text-sm outline-none focus:border-brand-red ${
+                  submitted && !phone.trim() ? "border-red-500" : "border-border"
+                }`}
+                required
+              />
+              {submitted && !phone.trim() && (
+                <p className="mt-1 text-xs text-red-600">Phone number is required</p>
+              )}
+            </div>
             <input
               type="email"
               value={email}

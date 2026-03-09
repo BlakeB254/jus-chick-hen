@@ -100,30 +100,34 @@ export function LocationSection() {
             </div>
           </motion.div>
 
-          {/* Map Placeholder */}
+          {/* Map Embed */}
           <motion.div
-            className="rounded-2xl overflow-hidden bg-white shadow-lg min-h-[350px] flex items-center justify-center"
+            className="rounded-2xl overflow-hidden bg-white shadow-lg min-h-[350px] flex flex-col"
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <div className="text-center px-8 py-12 w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-brand-warm to-white">
-              <MapPin size={48} className="text-brand-red/30 mb-4" />
-              <p className="font-display text-xl font-bold text-brand-brown">
-                {fullAddress}
-              </p>
-              <p className="mt-2 text-sm text-brand-brown/50">
-                {address.lat.toFixed(4)}&deg;N, {Math.abs(address.lng).toFixed(4)}&deg;W
-              </p>
+            <div className="flex-1 min-h-[300px]">
+              <iframe
+                src="https://www.openstreetmap.org/export/embed.html?bbox=-87.7198%2C41.8534%2C-87.7098%2C41.8634&layer=mapnik&marker=41.8584%2C-87.7148"
+                width="100%"
+                height="100%"
+                loading="lazy"
+                className="rounded-xl"
+                allowFullScreen
+                title="Jus Chick-Hen location map"
+              />
+            </div>
+            <div className="p-4 text-center">
               <a
-                href={mapsUrl}
+                href={`https://www.google.com/maps/dir/?api=1&destination=${address.lat},${address.lng}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-cta mt-6 rounded-full px-6 py-2.5 text-sm font-bold text-white inline-flex items-center gap-2"
+                className="inline-flex items-center gap-2 btn-cta rounded-full px-6 py-2.5 text-sm font-bold text-white"
               >
                 <Navigation size={16} />
-                Open in Google Maps
+                Get Directions
               </a>
             </div>
           </motion.div>

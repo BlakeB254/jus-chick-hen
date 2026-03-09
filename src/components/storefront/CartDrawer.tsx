@@ -4,10 +4,30 @@ import { X, Minus, Plus, Trash2, ShoppingBag } from "lucide-react";
 import Link from "next/link";
 import { useCart } from "@/stores/cart";
 import { formatPrice } from "@/lib/format";
+import { useEscapeKey } from "@/hooks/useEscapeKey";
 
 interface CartDrawerProps {
   open: boolean;
   onClose: () => void;
+}
+
+function CartFooter({ subtotalCents, onClose }: { subtotalCents: number; onClose: () => void }) {
+  return (
+    <div className="border-t border-border px-5 py-4 space-y-3">
+      <div className="flex items-center justify-between">
+        <span className="text-muted-foreground">Subtotal</span>
+        <span className="font-semibold">{formatPrice(subtotalCents)}</span>
+      </div>
+      <p className="text-xs text-muted-foreground">Tax calculated at checkout</p>
+      <Link
+        href="/checkout"
+        onClick={onClose}
+        className="block w-full btn-cta rounded-full py-3 text-center font-semibold text-white"
+      >
+        Checkout — {formatPrice(subtotalCents)}
+      </Link>
+    </div>
+  );
 }
 
 export function CartDrawer({ open, onClose }: CartDrawerProps) {
@@ -17,15 +37,17 @@ export function CartDrawer({ open, onClose }: CartDrawerProps) {
   const subtotalCents = useCart((s) => s.subtotalCents);
   const itemCount = useCart((s) => s.itemCount);
 
+  useEscapeKey(onClose, open);
+
   if (!open) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex justify-end">
       {/* Backdrop */}
-      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={onClose} />
+      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={onClose} role="button" aria-label="Close cart" />
 
       {/* Drawer */}
-      <div className="relative w-full max-w-md bg-white shadow-2xl animate-slide-in-right flex flex-col h-full">
+      <div className="relative w-full max-w-md bg-white shadow-2xl animate-slide-in-right flex flex-col h-full" role="dialog" aria-modal="true" aria-label="Shopping cart">
         {/* Header */}
         <div className="flex items-center justify-between border-b border-border px-5 py-4">
           <div className="flex items-center gap-2">
@@ -96,27 +118,7 @@ export function CartDrawer({ open, onClose }: CartDrawerProps) {
 
         {/* Footer */}
         {items.length > 0 && (
-          <div className="border-t border-border px-5 py-4 space-y-3">
-            {(() => {
-              const sub = subtotalCents();
-              return (
-                <>
-                  <div className="flex items-center justify-between">
-                    <span className="text-muted-foreground">Subtotal</span>
-                    <span className="font-semibold">{formatPrice(sub)}</span>
-                  </div>
-                  <p className="text-xs text-muted-foreground">Tax calculated at checkout</p>
-                  <Link
-                    href="/checkout"
-                    onClick={onClose}
-                    className="block w-full btn-cta rounded-full py-3 text-center font-semibold text-white"
-                  >
-                    Checkout — {formatPrice(sub)}
-                  </Link>
-                </>
-              );
-            })()}
-          </div>
+          <CartFooter subtotalCents={subtotalCents()} onClose={onClose} />
         )}
       </div>
     </div>

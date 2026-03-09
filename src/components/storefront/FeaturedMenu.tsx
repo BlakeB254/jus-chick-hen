@@ -29,8 +29,12 @@ export function FeaturedMenu() {
   const [featuredItems, setFeaturedItems] = useState<MenuItem[]>([]);
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
   const [cartOpen, setCartOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
-  useEffect(() => {
+  const fetchMenu = () => {
+    setLoading(true);
+    setError(false);
     fetch("/api/menu")
       .then((res) => res.json())
       .then((data: MenuGrouped[]) => {
@@ -39,10 +43,19 @@ export function FeaturedMenu() {
           .filter((item) => item.is_featured);
         setFeaturedItems(featured);
       })
-      .catch(() => {});
+      .catch(() => {
+        setError(true);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    fetchMenu();
   }, []);
 
-  if (featuredItems.length === 0) return null;
+  if (!loading && !error && featuredItems.length === 0) return null;
 
   return (
     <>
@@ -69,19 +82,43 @@ export function FeaturedMenu() {
           </motion.div>
 
           {/* Menu Grid — uses the same MenuItemCard as /menu */}
-          <motion.div
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-          >
-            {featuredItems.map((item) => (
-              <motion.div key={item.id} variants={itemVariants}>
-                <MenuItemCard item={item} onViewDetails={setSelectedItem} />
-              </motion.div>
-            ))}
-          </motion.div>
+          {loading ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {Array.from({ length: 3 }).map((_, i) => (
+                <div key={i} className="rounded-2xl bg-white p-4 animate-pulse">
+                  <div className="aspect-[4/3] bg-muted rounded-xl mb-4" />
+                  <div className="h-5 bg-muted rounded w-3/4 mb-3" />
+                  <div className="h-3 bg-muted rounded w-full mb-2" />
+                  <div className="h-3 bg-muted rounded w-2/3 mb-4" />
+                  <div className="h-5 bg-muted rounded w-16" />
+                </div>
+              ))}
+            </div>
+          ) : error ? (
+            <div className="text-center py-12">
+              <p className="text-brand-brown/60 mb-4">Couldn&apos;t load menu</p>
+              <button
+                onClick={fetchMenu}
+                className="inline-flex items-center gap-2 rounded-full bg-brand-red px-6 py-2.5 text-sm font-medium text-white hover:bg-brand-red/90 transition-colors"
+              >
+                Try Again
+              </button>
+            </div>
+          ) : (
+            <motion.div
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-50px" }}
+            >
+              {featuredItems.map((item) => (
+                <motion.div key={item.id} variants={itemVariants}>
+                  <MenuItemCard item={item} onViewDetails={setSelectedItem} />
+                </motion.div>
+              ))}
+            </motion.div>
+          )}
 
           {/* View Full Menu Link */}
           <motion.div

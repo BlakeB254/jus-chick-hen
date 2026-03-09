@@ -110,7 +110,10 @@ export function StorefrontNavbar() {
               {cartCount > 0 && (
                 <>
                   <span className="text-xs">{formatPrice(cartSubtotal)}</span>
-                  <span className="absolute -top-1.5 -right-1.5 flex items-center justify-center w-5 h-5 rounded-full bg-brand-red text-white text-xs font-bold">
+                  <span
+                    key={cartCount}
+                    className="absolute -top-1.5 -right-1.5 flex items-center justify-center w-5 h-5 rounded-full bg-brand-red text-white text-xs font-bold animate-badge-bounce"
+                  >
                     {cartCount}
                   </span>
                 </>
@@ -137,7 +140,10 @@ export function StorefrontNavbar() {
             >
               <ShoppingBag size={22} />
               {cartCount > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 flex items-center justify-center w-5 h-5 rounded-full bg-brand-red text-white text-[10px] font-bold">
+                <span
+                  key={cartCount}
+                  className="absolute -top-0.5 -right-0.5 flex items-center justify-center w-5 h-5 rounded-full bg-brand-red text-white text-[10px] font-bold animate-badge-bounce"
+                >
                   {cartCount}
                 </span>
               )}

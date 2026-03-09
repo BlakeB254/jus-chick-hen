@@ -4,6 +4,7 @@ import { Plus, Star } from "lucide-react";
 import type { MenuItem } from "@/lib/shared/types";
 import { formatPrice } from "@/lib/format";
 import { useCart } from "@/stores/cart";
+import { useToast } from "@/stores/toast";
 import { cn } from "@/lib/utils";
 
 interface MenuItemCardProps {
@@ -13,6 +14,7 @@ interface MenuItemCardProps {
 
 export function MenuItemCard({ item, onViewDetails }: MenuItemCardProps) {
   const addItem = useCart((s) => s.addItem);
+  const addToast = useToast((s) => s.addToast);
 
   const handleAdd = () => {
     addItem({
@@ -23,6 +25,7 @@ export function MenuItemCard({ item, onViewDetails }: MenuItemCardProps) {
       variant: null,
       notes: null,
     });
+    addToast(`${item.name} added to cart`);
   };
 
   return (
