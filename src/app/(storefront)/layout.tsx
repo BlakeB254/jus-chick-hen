@@ -9,7 +9,7 @@ export default function StorefrontLayout({
   return (
     <>
       <StorefrontNavbar />
-      <main>{children}</main>
+      <main className="pt-[72px]">{children}</main>
       <StorefrontFooter />
     </>
   );

@@ -43,41 +43,41 @@ async function seed() {
   console.log("Seeding menu items...");
   const items = [
     // Signature
-    { cat: "Signature", name: "Hot Honey Chicken (3pc)", price: 1099, featured: true, desc: "Our signature crispy chicken drizzled with hot honey sauce" },
-    { cat: "Signature", name: "Hot Honey Chicken (5pc)", price: 1599, featured: true, desc: "5 pieces of our famous hot honey chicken" },
-    { cat: "Signature", name: "Hot Honey Catfish Dinner", price: 1499, featured: true, desc: "Golden catfish filets with our signature hot honey glaze, served with fries and coleslaw" },
+    { cat: "Signature", name: "Hot Honey Chicken (3pc)", price: 1099, featured: true, desc: "Our signature crispy chicken drizzled with hot honey sauce", img: "/menu/hot-honey-wings.png" },
+    { cat: "Signature", name: "Hot Honey Chicken (5pc)", price: 1599, featured: true, desc: "5 pieces of our famous hot honey chicken", img: "/menu/hot-honey-wings.png" },
+    { cat: "Signature", name: "Hot Honey Catfish Dinner", price: 1499, featured: true, desc: "Golden catfish filets with our signature hot honey glaze, served with fries and coleslaw", img: "/menu/catfish-dinner.png" },
 
     // Chicken
-    { cat: "Chicken", name: "Chick-Hen Mixed Pieces (3pc)", price: 899, desc: "3 pieces of crispy fried mixed chicken" },
-    { cat: "Chicken", name: "Chick-Hen Mixed Pieces (5pc)", price: 1399, desc: "5 pieces of crispy fried mixed chicken" },
-    { cat: "Chicken", name: "Whole Chick-Hen Wings (6pc)", price: 899, featured: true, desc: "6 whole crispy fried chicken wings" },
-    { cat: "Chicken", name: "Whole Chick-Hen Wings (10pc)", price: 1499, desc: "10 whole crispy fried chicken wings" },
-    { cat: "Chicken", name: "Whole Chick-Hen Wings (15pc)", price: 1999, desc: "15 whole crispy fried chicken wings" },
-    { cat: "Chicken", name: "Whole Chick-Hen Wings (25pc)", price: 3299, desc: "25 whole crispy fried chicken wings — party size" },
-    { cat: "Chicken", name: "Whole Chick-Hen Wings (50pc)", price: 5999, desc: "50 whole crispy fried chicken wings — catering size" },
-    { cat: "Chicken", name: "Chicken Tenders (3pc)", price: 799, desc: "3 golden crispy chicken tenders" },
-    { cat: "Chicken", name: "Chicken Tenders (5pc)", price: 1199, desc: "5 golden crispy chicken tenders" },
+    { cat: "Chicken", name: "Chick-Hen Mixed Pieces (3pc)", price: 899, desc: "3 pieces of crispy fried mixed chicken", img: "/menu/mixed-pieces.png" },
+    { cat: "Chicken", name: "Chick-Hen Mixed Pieces (5pc)", price: 1399, desc: "5 pieces of crispy fried mixed chicken", img: "/menu/mixed-pieces.png" },
+    { cat: "Chicken", name: "Whole Chick-Hen Wings (6pc)", price: 899, featured: true, desc: "6 whole crispy fried chicken wings", img: "/menu/whole-wings.png" },
+    { cat: "Chicken", name: "Whole Chick-Hen Wings (10pc)", price: 1499, desc: "10 whole crispy fried chicken wings", img: "/menu/whole-wings.png" },
+    { cat: "Chicken", name: "Whole Chick-Hen Wings (15pc)", price: 1999, desc: "15 whole crispy fried chicken wings", img: "/menu/whole-wings.png" },
+    { cat: "Chicken", name: "Whole Chick-Hen Wings (25pc)", price: 3299, desc: "25 whole crispy fried chicken wings — party size", img: "/menu/party-wings.png" },
+    { cat: "Chicken", name: "Whole Chick-Hen Wings (50pc)", price: 5999, desc: "50 whole crispy fried chicken wings — catering size", img: "/menu/party-wings.png" },
+    { cat: "Chicken", name: "Chicken Tenders (3pc)", price: 799, desc: "3 golden crispy chicken tenders", img: "/menu/chicken-tenders.png" },
+    { cat: "Chicken", name: "Chicken Tenders (5pc)", price: 1199, desc: "5 golden crispy chicken tenders", img: "/menu/chicken-tenders.png" },
 
     // Seafood
-    { cat: "Seafood", name: "Catfish Dinner", price: 1399, desc: "Golden fried catfish served with fries and coleslaw" },
+    { cat: "Seafood", name: "Catfish Dinner", price: 1399, desc: "Golden fried catfish served with fries and coleslaw", img: "/menu/catfish-dinner.png" },
     { cat: "Seafood", name: "Shrimp Dinner", price: 1299, desc: "Crispy fried shrimp served with fries and coleslaw" },
-    { cat: "Seafood", name: "Fish Sandwich", price: 899, desc: "Crispy fried fish fillet on a toasted bun" },
-    { cat: "Seafood", name: "Wings & Fish Combo", price: 1599, featured: true, desc: "Wings and fish fillet combo with fries" },
+    { cat: "Seafood", name: "Fish Sandwich", price: 899, desc: "Crispy fried fish fillet on a toasted bun", img: "/menu/catfish-fries.png" },
+    { cat: "Seafood", name: "Wings & Fish Combo", price: 1599, featured: true, desc: "Wings and fish fillet combo with fries", img: "/menu/wing-fish-combo.png" },
 
     // Sandwiches
-    { cat: "Sandwiches", name: "Jus Chick-Hen Sandwich", price: 999, featured: true, desc: "Our signature crispy chicken sandwich" },
-    { cat: "Sandwiches", name: "Jus Chick-Hen Sandwich Combo", price: 1299, desc: "Signature chicken sandwich with fries and drink" },
+    { cat: "Sandwiches", name: "Jus Chick-Hen Sandwich", price: 999, featured: true, desc: "Our signature crispy chicken sandwich", img: "/menu/signature-chicken.png" },
+    { cat: "Sandwiches", name: "Jus Chick-Hen Sandwich Combo", price: 1299, desc: "Signature chicken sandwich with fries and drink", img: "/menu/signature-chicken.png" },
     { cat: "Sandwiches", name: "Philly Chicken Sandwich", price: 999, desc: "Philly-style chicken sandwich with peppers and onions" },
     { cat: "Sandwiches", name: "Philly Chicken Sandwich Combo", price: 1299, desc: "Philly chicken sandwich with fries and drink" },
-    { cat: "Sandwiches", name: "Jus Fish Sandwich", price: 899, desc: "Crispy fish sandwich" },
+    { cat: "Sandwiches", name: "Jus Fish Sandwich", price: 899, desc: "Crispy fish sandwich", img: "/menu/catfish-fries.png" },
     { cat: "Sandwiches", name: "Cheeseburger", price: 799, desc: "Classic cheeseburger" },
     { cat: "Sandwiches", name: "Double Cheeseburger", price: 1099, desc: "Double patty cheeseburger" },
 
     // Specialty Eggrolls
-    { cat: "Specialty Eggrolls", name: "Alfredo Eggroll", price: 599, featured: true, desc: "Creamy alfredo chicken stuffed eggroll" },
-    { cat: "Specialty Eggrolls", name: "Italian Beef Eggroll", price: 599, desc: "Italian beef stuffed eggroll — Chicago style" },
-    { cat: "Specialty Eggrolls", name: "Philly Eggroll", price: 599, desc: "Philly cheesesteak stuffed eggroll" },
-    { cat: "Specialty Eggrolls", name: "Jerk Eggroll", price: 599, desc: "Jerk chicken stuffed eggroll" },
+    { cat: "Specialty Eggrolls", name: "Alfredo Eggroll", price: 599, featured: true, desc: "Creamy alfredo chicken stuffed eggroll", img: "/menu/eggrolls.png" },
+    { cat: "Specialty Eggrolls", name: "Italian Beef Eggroll", price: 599, desc: "Italian beef stuffed eggroll — Chicago style", img: "/menu/eggrolls.png" },
+    { cat: "Specialty Eggrolls", name: "Philly Eggroll", price: 599, desc: "Philly cheesesteak stuffed eggroll", img: "/menu/eggrolls.png" },
+    { cat: "Specialty Eggrolls", name: "Jerk Eggroll", price: 599, desc: "Jerk chicken stuffed eggroll", img: "/menu/eggrolls.png" },
 
     // Pizza
     { cat: "Pizza", name: "Jerk Alfredo Pizza", price: 1799, desc: '14" pizza with jerk chicken and alfredo sauce' },
@@ -86,7 +86,7 @@ async function seed() {
 
     // Specials
     { cat: "Specials", name: "Fried Jerk Chicken Tacos (3pc)", price: 1099, desc: "3 crispy jerk chicken tacos" },
-    { cat: "Specials", name: "Pizza Puff", price: 399, desc: "Classic Chicago pizza puff" },
+    { cat: "Specials", name: "Pizza Puff", price: 399, desc: "Classic Chicago pizza puff", img: "/menu/pizza-puff.png" },
 
     // Sides & Drinks
     { cat: "Sides & Drinks", name: "French Fries (Regular)", price: 399, desc: "Golden crispy french fries" },
@@ -106,8 +106,8 @@ async function seed() {
 
   let sortOrder = 0;
   for (const item of items) {
-    await sql`INSERT INTO menu_items (id, category_id, name, description, price_cents, is_featured, sort_order)
-      VALUES (${nanoid()}, ${catMap[item.cat]}, ${item.name}, ${item.desc}, ${item.price}, ${item.featured ?? false}, ${sortOrder++})`;
+    await sql`INSERT INTO menu_items (id, category_id, name, description, price_cents, image_url, is_featured, sort_order)
+      VALUES (${nanoid()}, ${catMap[item.cat]}, ${item.name}, ${item.desc}, ${item.price}, ${item.img ?? null}, ${item.featured ?? false}, ${sortOrder++})`;
   }
 
   console.log("Seeding settings...");

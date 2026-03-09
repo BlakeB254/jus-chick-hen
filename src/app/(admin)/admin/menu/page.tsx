@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Plus, Pencil, Trash2, Star, Eye, EyeOff } from "lucide-react";
+import { Plus, Pencil, Trash2, Star, Eye, EyeOff, Upload, ImageIcon } from "lucide-react";
 import { formatPrice } from "@/lib/format";
 import type { MenuItem, MenuCategory } from "@/lib/shared/types";
 import { cn } from "@/lib/utils";
@@ -12,6 +12,7 @@ export default function MenuManagePage() {
   const [loading, setLoading] = useState(true);
   const [editingItem, setEditingItem] = useState<Partial<MenuItem> | null>(null);
   const [showForm, setShowForm] = useState(false);
+  const [uploading, setUploading] = useState(false);
 
   const fetchMenu = async () => {
     const res = await fetch("/api/admin/menu");
@@ -49,6 +50,20 @@ export default function MenuManagePage() {
     if (!confirm("Delete this menu item?")) return;
     await fetch(`/api/admin/menu/${id}`, { method: "DELETE" });
     fetchMenu();
+  };
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file || !editingItem) return;
+    setUploading(true);
+    const form = new FormData();
+    form.append("file", file);
+    const res = await fetch("/api/admin/upload", { method: "POST", body: form });
+    if (res.ok) {
+      const { url } = await res.json();
+      setEditingItem({ ...editingItem, image_url: url });
+    }
+    setUploading(false);
   };
 
   const handleToggle = async (item: MenuItem, field: "is_available" | "is_featured") => {
@@ -111,6 +126,28 @@ export default function MenuManagePage() {
               className="rounded-lg border border-gray-200 px-3 py-2 text-sm outline-none focus:border-brand-red"
             />
           </div>
+          {/* Image upload */}
+          <div className="mt-4 flex items-center gap-4">
+            {editingItem.image_url ? (
+              <img src={editingItem.image_url} alt="" className="h-16 w-16 rounded-lg object-cover border border-gray-200" />
+            ) : (
+              <div className="flex h-16 w-16 items-center justify-center rounded-lg border border-dashed border-gray-300 bg-gray-50">
+                <ImageIcon size={20} className="text-gray-400" />
+              </div>
+            )}
+            <div className="flex flex-col gap-1">
+              <label className="flex cursor-pointer items-center gap-2 rounded-lg border border-gray-200 px-3 py-1.5 text-sm hover:bg-gray-50 transition-colors">
+                <Upload size={14} />
+                {uploading ? "Uploading..." : "Upload Image"}
+                <input type="file" accept="image/*" onChange={handleImageUpload} className="sr-only" disabled={uploading} />
+              </label>
+              {editingItem.image_url && (
+                <button onClick={() => setEditingItem({ ...editingItem, image_url: "" })} className="text-xs text-red-500 hover:underline text-left">
+                  Remove image
+                </button>
+              )}
+            </div>
+          </div>
           <div className="flex gap-3 mt-4">
             <label className="flex items-center gap-2 text-sm">
               <input type="checkbox" checked={editingItem.is_featured ?? false} onChange={(e) => setEditingItem({ ...editingItem, is_featured: e.target.checked })} />
@@ -147,6 +184,13 @@ export default function MenuManagePage() {
                   catItems.map((item) => (
                     <div key={item.id} className="flex items-center justify-between p-3 hover:bg-gray-50 transition-colors">
                       <div className="flex items-center gap-3 min-w-0">
+                        {item.image_url ? (
+                          <img src={item.image_url} alt="" className="h-8 w-8 rounded object-cover shrink-0" />
+                        ) : (
+                          <div className="h-8 w-8 rounded bg-gray-100 shrink-0 flex items-center justify-center">
+                            <ImageIcon size={12} className="text-gray-400" />
+                          </div>
+                        )}
                         <span className={cn("text-sm font-medium truncate", !item.is_available && "text-gray-400 line-through")}>
                           {item.name}
                         </span>

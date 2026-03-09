@@ -33,9 +33,9 @@ export function StorefrontNavbar() {
           <Image
             src="/logo.jpg"
             alt="Jus Chick-Hen"
-            width={44}
-            height={44}
-            className="rounded-full"
+            width={56}
+            height={56}
+            className="rounded-full ring-2 ring-brand-gold/60 shadow-md object-cover"
             priority
           />
           <span className={cn(

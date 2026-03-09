@@ -47,7 +47,7 @@ export function MenuPageClient() {
     <>
       <div className="min-h-screen bg-background">
         {/* Header */}
-        <div className="bg-white border-b border-border sticky top-0 z-40">
+        <div className="bg-white border-b border-border sticky top-[72px] z-40">
           <div className="mx-auto max-w-6xl px-4 py-4">
             <div className="flex items-center justify-between mb-3">
               <h1 className="text-2xl font-bold text-foreground">Our Menu</h1>
