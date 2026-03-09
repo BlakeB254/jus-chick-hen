@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { StatsCards } from "@/components/admin/StatsCards";
 import { OrderCard } from "@/components/admin/OrderCard";
+import { updateOrderStatus } from "@/lib/admin-helpers";
 import type { Order, OrderStatus } from "@/lib/shared/types";
 
 export default function DashboardPage() {
@@ -23,11 +24,7 @@ export default function DashboardPage() {
   useEffect(() => { fetchData(); }, []);
 
   const handleUpdateStatus = async (id: string, status: OrderStatus) => {
-    await fetch(`/api/admin/orders/${id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ status }),
-    });
+    await updateOrderStatus(id, status);
     fetchData();
   };
 

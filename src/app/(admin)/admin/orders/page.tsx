@@ -2,11 +2,12 @@
 
 import { useState, useEffect } from "react";
 import { OrderCard } from "@/components/admin/OrderCard";
-import { ORDER_STATUS_LABELS } from "@/lib/shared/constants";
+import { ORDER_STATUS_LABELS, ORDER_STATUS_FLOW } from "@/lib/shared/constants";
+import { updateOrderStatus } from "@/lib/admin-helpers";
 import type { Order, OrderStatus } from "@/lib/shared/types";
 import { cn } from "@/lib/utils";
 
-const statusFilters = ["all", "pending", "confirmed", "preparing", "ready", "out_for_delivery", "delivered", "picked_up", "cancelled"];
+const statusFilters = ["all", ...ORDER_STATUS_FLOW];
 
 export default function OrdersPage() {
   const [orders, setOrders] = useState<Order[]>([]);
@@ -23,11 +24,7 @@ export default function OrdersPage() {
   useEffect(() => { fetchOrders(); }, [filter]);
 
   const handleUpdateStatus = async (id: string, status: OrderStatus) => {
-    await fetch(`/api/admin/orders/${id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ status }),
-    });
+    await updateOrderStatus(id, status);
     fetchOrders();
   };
 

@@ -44,6 +44,11 @@ export const ORDER_STATUS_LABELS: Record<string, string> = {
   cancelled: "Cancelled",
 };
 
+export const COOKIE_NAMES = {
+  CUSTOMER: "jch_session",
+  ADMIN: "jch_admin_session",
+} as const;
+
 export const SETTINGS_KEYS = {
   DELIVERY_RADIUS_MILES: "delivery_radius_miles",
   DELIVERY_FEE_CENTS: "delivery_fee_cents",

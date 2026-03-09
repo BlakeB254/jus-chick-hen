@@ -19,6 +19,6 @@ export async function POST(req: NextRequest) {
     VALUES (${id}, ${body.category_id}, ${body.name}, ${body.description || null}, ${body.price_cents}, ${body.is_available ?? true}, ${body.is_featured ?? false}, ${body.sort_order ?? 0})
   `;
 
-  const [item] = await sql`SELECT * FROM menu_items WHERE id = ${id}`;
-  return NextResponse.json(item, { status: 201 });
+  const rows = await sql`SELECT * FROM menu_items WHERE id = ${id}` as Record<string, unknown>[];
+  return NextResponse.json(rows[0], { status: 201 });
 }

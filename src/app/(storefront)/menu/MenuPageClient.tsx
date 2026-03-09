@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { ShoppingBag, Search } from "lucide-react";
 import { MenuCategoryTabs } from "@/components/storefront/MenuCategoryTabs";
 import { MenuItemCard } from "@/components/storefront/MenuItemCard";
@@ -28,17 +28,20 @@ export function MenuPageClient() {
       .catch(() => setLoading(false));
   }, []);
 
-  const categories = menu.map((g) => g.category);
+  const categories = useMemo(() => menu.map((g) => g.category), [menu]);
 
-  const filteredGroups = menu
-    .filter((g) => !activeCategory || g.category.id === activeCategory)
-    .map((g) => ({
-      ...g,
-      items: g.items.filter((item) =>
-        !searchQuery || item.name.toLowerCase().includes(searchQuery.toLowerCase())
-      ),
-    }))
-    .filter((g) => g.items.length > 0);
+  const filteredGroups = useMemo(() => {
+    const query = searchQuery.toLowerCase();
+    return menu
+      .filter((g) => !activeCategory || g.category.id === activeCategory)
+      .map((g) => ({
+        ...g,
+        items: g.items.filter((item) =>
+          !query || item.name.toLowerCase().includes(query)
+        ),
+      }))
+      .filter((g) => g.items.length > 0);
+  }, [menu, activeCategory, searchQuery]);
 
   return (
     <>
@@ -54,11 +57,14 @@ export function MenuPageClient() {
               >
                 <ShoppingBag size={16} />
                 Cart
-                {itemCount() > 0 && (
-                  <span className="absolute -top-1.5 -right-1.5 flex items-center justify-center w-5 h-5 rounded-full bg-brand-gold text-brand-brown text-xs font-bold">
-                    {itemCount()}
-                  </span>
-                )}
+                {(() => {
+                  const count = itemCount();
+                  return count > 0 ? (
+                    <span className="absolute -top-1.5 -right-1.5 flex items-center justify-center w-5 h-5 rounded-full bg-brand-gold text-brand-brown text-xs font-bold">
+                      {count}
+                    </span>
+                  ) : null;
+                })()}
               </button>
             </div>
 

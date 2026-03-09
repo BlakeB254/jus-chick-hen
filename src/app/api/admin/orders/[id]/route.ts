@@ -8,10 +8,10 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
 
   await sql`UPDATE orders SET status = ${status}, updated_at = NOW() WHERE id = ${id}`;
 
-  const [order] = await sql`SELECT * FROM orders WHERE id = ${id}`;
-  if (!order) {
+  const rows = await sql`SELECT * FROM orders WHERE id = ${id}` as Record<string, unknown>[];
+  if (rows.length === 0) {
     return NextResponse.json({ error: "Order not found" }, { status: 404 });
   }
 
-  return NextResponse.json(order);
+  return NextResponse.json(rows[0]);
 }

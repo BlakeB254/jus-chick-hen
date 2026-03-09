@@ -55,7 +55,7 @@ export function OrderCTA() {
         >
           {/* Call to order */}
           <a
-            href={`tel:${brand.phone.replace(/[^0-9+]/g, "")}`}
+            href={brand.phoneHref}
             className="btn-gold rounded-full px-8 py-4 text-base font-bold inline-flex items-center gap-2 min-w-[200px] justify-center"
           >
             <Phone size={18} />
@@ -129,7 +129,7 @@ export function OrderCTA() {
           transition={{ duration: 0.6, delay: 0.5 }}
         >
           Call us directly at{" "}
-          <a href={`tel:${brand.phone.replace(/[^0-9+]/g, "")}`} className="text-brand-gold hover:underline">
+          <a href={brand.phoneHref} className="text-brand-gold hover:underline">
             {brand.phone}
           </a>
         </motion.p>

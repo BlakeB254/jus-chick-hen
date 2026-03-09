@@ -251,25 +251,34 @@ export function CheckoutClient() {
               </div>
             ))}
             <hr className="border-border" />
-            <div className="flex justify-between">
-              <span className="text-muted-foreground">Subtotal</span>
-              <span>{formatPrice(subtotalCents())}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-muted-foreground">Tax</span>
-              <span>{formatPrice(taxCents())}</span>
-            </div>
-            {orderType === "delivery" && deliveryFeeCents > 0 && (
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Delivery Fee</span>
-                <span>{formatPrice(deliveryFeeCents)}</span>
-              </div>
-            )}
-            <hr className="border-border" />
-            <div className="flex justify-between text-base font-bold">
-              <span>Total</span>
-              <span className="text-brand-red">{formatPrice(totalCents())}</span>
-            </div>
+            {(() => {
+              const sub = subtotalCents();
+              const tax = taxCents();
+              const total = totalCents();
+              return (
+                <>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Subtotal</span>
+                    <span>{formatPrice(sub)}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Tax</span>
+                    <span>{formatPrice(tax)}</span>
+                  </div>
+                  {orderType === "delivery" && deliveryFeeCents > 0 && (
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Delivery Fee</span>
+                      <span>{formatPrice(deliveryFeeCents)}</span>
+                    </div>
+                  )}
+                  <hr className="border-border" />
+                  <div className="flex justify-between text-base font-bold">
+                    <span>Total</span>
+                    <span className="text-brand-red">{formatPrice(total)}</span>
+                  </div>
+                </>
+              );
+            })()}
           </div>
         </div>
 

@@ -6,7 +6,6 @@ import { brand } from "@/config/brand";
 export function StorefrontFooter() {
   const year = new Date().getFullYear();
   const { address, phone, hours } = brand;
-  const fullAddress = `${address.street}, ${address.city}, ${address.state} ${address.zip}`;
 
   // Consolidate hours display (Tue-Sun same hours)
   const mondayHours = hours.find((h) => h.day === "Monday");
@@ -64,7 +63,7 @@ export function StorefrontFooter() {
             </div>
             <div className="flex gap-2 text-sm text-white/60 mt-3">
               <Phone size={16} className="shrink-0 mt-0.5" />
-              <a href={`tel:${phone.replace(/[^0-9+]/g, "")}`} className="hover:text-white transition-colors">
+              <a href={brand.phoneHref} className="hover:text-white transition-colors">
                 {phone}
               </a>
             </div>

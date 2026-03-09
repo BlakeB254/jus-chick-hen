@@ -97,18 +97,25 @@ export function CartDrawer({ open, onClose }: CartDrawerProps) {
         {/* Footer */}
         {items.length > 0 && (
           <div className="border-t border-border px-5 py-4 space-y-3">
-            <div className="flex items-center justify-between">
-              <span className="text-muted-foreground">Subtotal</span>
-              <span className="font-semibold">{formatPrice(subtotalCents())}</span>
-            </div>
-            <p className="text-xs text-muted-foreground">Tax calculated at checkout</p>
-            <Link
-              href="/checkout"
-              onClick={onClose}
-              className="block w-full btn-cta rounded-full py-3 text-center font-semibold text-white"
-            >
-              Checkout — {formatPrice(subtotalCents())}
-            </Link>
+            {(() => {
+              const sub = subtotalCents();
+              return (
+                <>
+                  <div className="flex items-center justify-between">
+                    <span className="text-muted-foreground">Subtotal</span>
+                    <span className="font-semibold">{formatPrice(sub)}</span>
+                  </div>
+                  <p className="text-xs text-muted-foreground">Tax calculated at checkout</p>
+                  <Link
+                    href="/checkout"
+                    onClick={onClose}
+                    className="block w-full btn-cta rounded-full py-3 text-center font-semibold text-white"
+                  >
+                    Checkout — {formatPrice(sub)}
+                  </Link>
+                </>
+              );
+            })()}
           </div>
         )}
       </div>

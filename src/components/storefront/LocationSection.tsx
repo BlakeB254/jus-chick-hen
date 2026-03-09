@@ -6,7 +6,7 @@ import { brand } from "@/config/brand";
 
 export function LocationSection() {
   const { address, phone, hours } = brand;
-  const fullAddress = `${address.street}, ${address.city}, ${address.state} ${address.zip}`;
+  const fullAddress = brand.fullAddress;
   const mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(fullAddress)}`;
 
   return (
@@ -68,7 +68,7 @@ export function LocationSection() {
               <div>
                 <h3 className="font-display text-lg font-bold text-brand-brown">Call Us</h3>
                 <a
-                  href={`tel:${phone.replace(/[^0-9+]/g, "")}`}
+                  href={brand.phoneHref}
                   className="mt-1 text-lg text-brand-brown/70 hover:text-brand-red transition-colors"
                 >
                   {phone}

@@ -1,7 +1,7 @@
 "use client";
 
 import { Clock, MapPin, Phone, User } from "lucide-react";
-import { formatPrice } from "@/lib/format";
+import { formatPrice, getTimeAgo } from "@/lib/format";
 import { ORDER_STATUS_LABELS } from "@/lib/shared/constants";
 import type { Order, OrderStatus } from "@/lib/shared/types";
 import { cn } from "@/lib/utils";
@@ -98,12 +98,3 @@ export function OrderCard({ order, onUpdateStatus }: OrderCardProps) {
   );
 }
 
-function getTimeAgo(dateStr: string): string {
-  const diff = Date.now() - new Date(dateStr).getTime();
-  const mins = Math.floor(diff / 60000);
-  if (mins < 1) return "just now";
-  if (mins < 60) return `${mins}m ago`;
-  const hours = Math.floor(mins / 60);
-  if (hours < 24) return `${hours}h ago`;
-  return `${Math.floor(hours / 24)}d ago`;
-}

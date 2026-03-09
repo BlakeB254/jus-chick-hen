@@ -1,11 +1,11 @@
 import { nanoid } from "nanoid";
 import { cookies } from "next/headers";
 import { getDb } from "@/lib/db";
-import { AUTH_CONFIG } from "@/lib/shared/constants";
+import { AUTH_CONFIG, COOKIE_NAMES } from "@/lib/shared/constants";
 import type { Session } from "@/lib/shared/types";
 
-const CUSTOMER_COOKIE = "jch_session";
-const ADMIN_COOKIE = "jch_admin_session";
+const CUSTOMER_COOKIE = COOKIE_NAMES.CUSTOMER;
+const ADMIN_COOKIE = COOKIE_NAMES.ADMIN;
 
 // ── Session CRUD ──
 

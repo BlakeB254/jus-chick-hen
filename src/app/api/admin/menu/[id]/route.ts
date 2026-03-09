@@ -20,21 +20,18 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
     return NextResponse.json({ error: "No valid fields to update" }, { status: 400 });
   }
 
-  // Build dynamic update — since Neon tagged templates don't support dynamic column names easily,
-  // we update each field individually
-  for (let i = 0; i < fields.length; i++) {
-    const field = fields[i];
-    const val = values[i];
-    // Safe: field name is validated against allowlist above
-    await sql(`UPDATE menu_items SET ${field} = $1 WHERE id = $2`, [val, id]);
-  }
+  // Build a single UPDATE with all fields — column names are validated against the allowlist above
+  const setClauses = fields.map((f, i) => `${f} = $${i + 1}`).join(", ");
+  const result = await sql(
+    `UPDATE menu_items SET ${setClauses} WHERE id = $${fields.length + 1} RETURNING *`,
+    [...values, id]
+  ) as Record<string, unknown>[];
 
-  const [item] = await sql`SELECT * FROM menu_items WHERE id = ${id}`;
-  if (!item) {
+  if (result.length === 0) {
     return NextResponse.json({ error: "Item not found" }, { status: 404 });
   }
 
-  return NextResponse.json(item);
+  return NextResponse.json(result[0]);
 }
 
 export async function DELETE(_req: NextRequest, { params }: { params: Promise<{ id: string }> }) {

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getDb } from "@/lib/db";
 import { nanoid } from "nanoid";
-import { TAX_RATE } from "@/lib/shared/constants";
+import { TAX_RATE, SETTINGS_KEYS } from "@/lib/shared/constants";
 import type { CreateOrderPayload } from "@/lib/shared/types";
 
 export async function POST(req: NextRequest) {
@@ -20,8 +20,8 @@ export async function POST(req: NextRequest) {
   // Look up delivery fee from settings
   let deliveryFeeCents = 0;
   if (body.type === "delivery") {
-    const [feeRow] = await sql`SELECT value FROM settings WHERE key = 'delivery_fee_cents'`;
-    deliveryFeeCents = feeRow ? parseInt(feeRow.value, 10) : 399;
+    const feeRows = await sql`SELECT value FROM settings WHERE key = ${SETTINGS_KEYS.DELIVERY_FEE_CENTS}` as Record<string, string>[];
+    deliveryFeeCents = feeRows[0] ? parseInt(feeRows[0].value, 10) : 399;
   }
 
   const taxCents = Math.round(subtotalCents * TAX_RATE);
@@ -34,12 +34,14 @@ export async function POST(req: NextRequest) {
     VALUES (${orderId}, 'pending', ${body.type}, ${subtotalCents}, ${deliveryFeeCents}, ${taxCents}, ${totalCents}, ${body.address || null}, ${body.notes || null}, ${body.customer_name}, ${body.customer_phone}, ${body.customer_email || null})
   `;
 
-  for (const item of body.items) {
-    await sql`
-      INSERT INTO order_items (id, order_id, menu_item_id, name, price_cents, quantity, variant, notes)
-      VALUES (${nanoid()}, ${orderId}, ${item.menu_item_id}, ${item.name}, ${item.price_cents}, ${item.quantity}, ${item.variant || null}, ${item.notes || null})
-    `;
-  }
+  await Promise.all(
+    body.items.map((item) =>
+      sql`
+        INSERT INTO order_items (id, order_id, menu_item_id, name, price_cents, quantity, variant, notes)
+        VALUES (${nanoid()}, ${orderId}, ${item.menu_item_id}, ${item.name}, ${item.price_cents}, ${item.quantity}, ${item.variant || null}, ${item.notes || null})
+      `
+    )
+  );
 
   return NextResponse.json({
     id: orderId,

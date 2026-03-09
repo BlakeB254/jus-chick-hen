@@ -68,7 +68,7 @@ export function StorefrontNavbar() {
         {/* Desktop Right: Phone + CTA */}
         <div className="hidden lg:flex items-center gap-4">
           <a
-            href={`tel:${brand.phone.replace(/[^0-9+]/g, "")}`}
+            href={brand.phoneHref}
             className={cn(
               "flex items-center gap-1.5 text-sm font-medium transition-colors",
               scrolled ? "text-brand-brown/70" : "text-white/80"
@@ -120,7 +120,7 @@ export function StorefrontNavbar() {
                 </Link>
               ))}
               <a
-                href={`tel:${brand.phone.replace(/[^0-9+]/g, "")}`}
+                href={brand.phoneHref}
                 className="flex items-center gap-2 text-lg font-medium text-brand-brown py-3 border-b border-brand-gold/10"
               >
                 <Phone size={18} />

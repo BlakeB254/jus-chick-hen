@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { COOKIE_NAMES } from "@/lib/shared/constants";
 
-const ADMIN_COOKIE = "jch_admin_session";
+const ADMIN_COOKIE = COOKIE_NAMES.ADMIN;
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;

@@ -1,21 +1,15 @@
-import { neon } from "@neondatabase/serverless";
+import { neon, type NeonQueryFunction } from "@neondatabase/serverless";
+
+let cached: NeonQueryFunction<false, false> | null = null;
 
 function getDb() {
-  const url = process.env.DATABASE_URL;
-  if (!url) throw new Error("DATABASE_URL is not set");
-  return neon(url);
+  if (!cached) {
+    const url = process.env.DATABASE_URL;
+    if (!url) throw new Error("DATABASE_URL is not set");
+    cached = neon(url);
+  }
+  return cached;
 }
-
-export const sql = new Proxy({} as ReturnType<typeof neon>, {
-  get(_, prop) {
-    const db = getDb();
-    return (db as unknown as Record<string | symbol, unknown>)[prop];
-  },
-  apply(_, __, args) {
-    const db = getDb();
-    return (db as unknown as (...a: unknown[]) => unknown)(...args);
-  },
-});
 
 // ── Table initialization ──
 

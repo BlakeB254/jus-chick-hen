@@ -70,6 +70,8 @@ export interface BrandConfig {
     yelp?: string;
   };
   kmp: boolean;
+  readonly phoneHref: string;
+  readonly fullAddress: string;
 }
 
 export const brand: BrandConfig = {
@@ -153,4 +155,12 @@ export const brand: BrandConfig = {
   },
 
   kmp: false,
+
+  get phoneHref() {
+    return `tel:${this.phone.replace(/[^0-9+]/g, "")}`;
+  },
+
+  get fullAddress() {
+    return `${this.address.street}, ${this.address.city}, ${this.address.state} ${this.address.zip}`;
+  },
 };
