@@ -1,0 +1,278 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  /* ── shadcn/ui variable mappings ── */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* ── Radii ── */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+
+  /* ── Jus Chick-Hen Brand Colors ── */
+  --color-brand-red: #CC0000;
+  --color-brand-red-light: #FF1A1A;
+  --color-brand-red-dark: #990000;
+  --color-brand-gold: #FFD700;
+  --color-brand-gold-light: #FFE44D;
+  --color-brand-gold-dark: #CCA600;
+  --color-brand-cream: #FFFDF5;
+  --color-brand-warm: #FFF8E7;
+  --color-brand-brown: #1A0A00;
+
+  /* ── Brand slots (set by brand.ts via CSS vars) ── */
+  --color-brand-primary: var(--brand-primary);
+  --color-brand-accent: var(--brand-accent);
+  --color-brand-bg: var(--brand-bg);
+  --color-brand-surface: var(--brand-surface);
+  --color-brand-muted: var(--brand-muted);
+
+  /* ── Fibonacci Spacing ── */
+  --spacing-fib-1: 3px;
+  --spacing-fib-2: 5px;
+  --spacing-fib-3: 8px;
+  --spacing-fib-4: 13px;
+  --spacing-fib-5: 21px;
+  --spacing-fib-6: 34px;
+  --spacing-fib-7: 55px;
+  --spacing-fib-8: 89px;
+  --spacing-fib-9: 144px;
+
+  /* ── Fibonacci Radii ── */
+  --radius-fib-1: 3px;
+  --radius-fib-2: 5px;
+  --radius-fib-3: 8px;
+  --radius-fib-4: 13px;
+  --radius-fib-5: 21px;
+
+  /* ── Font Variables ── */
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
+
+  /* ── Sidebar (shadcn) ── */
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+
+  /* ── Charts (shadcn) ── */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+}
+
+/* ── Light Mode (primary for restaurant) ── */
+:root {
+  --radius: 0.625rem;
+  --background: #FFFDF5;
+  --foreground: #1A1A1A;
+  --card: #FFFFFF;
+  --card-foreground: #1A1A1A;
+  --popover: #FFFFFF;
+  --popover-foreground: #1A1A1A;
+  --primary: #CC0000;
+  --primary-foreground: #FFFFFF;
+  --secondary: #FFF8E7;
+  --secondary-foreground: #1A1A1A;
+  --muted: #F5F0E0;
+  --muted-foreground: #666666;
+  --accent: #FFD700;
+  --accent-foreground: #1A0A00;
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: #E8DCC8;
+  --input: #E8DCC8;
+  --ring: #CC0000;
+  --chart-1: #CC0000;
+  --chart-2: #FFD700;
+  --chart-3: #22C55E;
+  --chart-4: #F59E0B;
+  --chart-5: #94A3B8;
+  --sidebar: #FFF8E7;
+  --sidebar-foreground: #1A1A1A;
+  --sidebar-primary: #CC0000;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #FFD700;
+  --sidebar-accent-foreground: #1A0A00;
+  --sidebar-border: #E8DCC8;
+  --sidebar-ring: #CC0000;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-body), system-ui, sans-serif;
+  }
+}
+
+/* ── Restaurant Hero Gradient ── */
+.hero-gradient {
+  background: linear-gradient(
+    135deg,
+    #CC0000 0%,
+    #990000 40%,
+    #1A0A00 100%
+  );
+}
+
+.hero-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 0.6) 50%,
+    rgba(26, 10, 0, 0.9) 100%
+  );
+}
+
+/* ── Brand Gradient CTA ── */
+.btn-cta {
+  background: linear-gradient(135deg, #CC0000, #FF1A1A);
+  transition: all 0.3s ease;
+}
+.btn-cta:hover {
+  box-shadow:
+    0 0 20px rgba(204, 0, 0, 0.4),
+    0 0 40px rgba(204, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.btn-gold {
+  background: linear-gradient(135deg, #FFD700, #FFE44D);
+  color: #1A0A00;
+  transition: all 0.3s ease;
+}
+.btn-gold:hover {
+  box-shadow:
+    0 0 20px rgba(255, 215, 0, 0.4),
+    0 0 40px rgba(255, 215, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+/* ── Food Card Styling ── */
+.food-card {
+  transition: all 0.3s ease;
+  border: 1px solid rgba(232, 220, 200, 0.5);
+}
+.food-card:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 12px 40px rgba(204, 0, 0, 0.08),
+    0 4px 12px rgba(0, 0, 0, 0.06);
+  border-color: #FFD700;
+}
+
+/* ── Text Gradient ── */
+.text-gradient-brand {
+  background: linear-gradient(135deg, #CC0000, #FFD700);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Animations ── */
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out both;
+}
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+.animate-scale-in {
+  animation: scale-in 0.4s ease-out both;
+}
+
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(100%); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.animate-slide-in-right {
+  animation: slide-in-right 0.3s ease-out both;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(204, 0, 0, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(204, 0, 0, 0.5);
+  }
+}
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Stagger delays */
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.1s; }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.2s; }
+.stagger-5 { animation-delay: 0.25s; }
+.stagger-6 { animation-delay: 0.3s; }
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(204, 0, 0, 0.2);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(204, 0, 0, 0.4);
+}
+
+/* ── Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in-up,
+  .animate-scale-in,
+  .animate-slide-in-right,
+  .animate-pulse-glow {
+    animation: none !important;
+  }
+  .btn-cta:hover,
+  .btn-gold:hover,
+  .food-card:hover {
+    transform: none;
+  }
+}
