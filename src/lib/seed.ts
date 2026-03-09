@@ -60,18 +60,18 @@ async function seed() {
 
     // Seafood
     { cat: "Seafood", name: "Catfish Dinner", price: 1399, desc: "Golden fried catfish served with fries and coleslaw", img: "/menu/catfish-dinner.png" },
-    { cat: "Seafood", name: "Shrimp Dinner", price: 1299, desc: "Crispy fried shrimp served with fries and coleslaw" },
+    { cat: "Seafood", name: "Shrimp Dinner", price: 1299, desc: "Crispy fried shrimp served with fries and coleslaw", img: "/menu/shrimp-dinner.png" },
     { cat: "Seafood", name: "Fish Sandwich", price: 899, desc: "Crispy fried fish fillet on a toasted bun", img: "/menu/catfish-fries.png" },
     { cat: "Seafood", name: "Wings & Fish Combo", price: 1599, featured: true, desc: "Wings and fish fillet combo with fries", img: "/menu/wing-fish-combo.png" },
 
     // Sandwiches
     { cat: "Sandwiches", name: "Jus Chick-Hen Sandwich", price: 999, featured: true, desc: "Our signature crispy chicken sandwich", img: "/menu/signature-chicken.png" },
     { cat: "Sandwiches", name: "Jus Chick-Hen Sandwich Combo", price: 1299, desc: "Signature chicken sandwich with fries and drink", img: "/menu/signature-chicken.png" },
-    { cat: "Sandwiches", name: "Philly Chicken Sandwich", price: 999, desc: "Philly-style chicken sandwich with peppers and onions" },
-    { cat: "Sandwiches", name: "Philly Chicken Sandwich Combo", price: 1299, desc: "Philly chicken sandwich with fries and drink" },
+    { cat: "Sandwiches", name: "Philly Chicken Sandwich", price: 999, desc: "Philly-style chicken sandwich with peppers and onions", img: "/menu/philly-sandwich.png" },
+    { cat: "Sandwiches", name: "Philly Chicken Sandwich Combo", price: 1299, desc: "Philly chicken sandwich with fries and drink", img: "/menu/philly-sandwich.png" },
     { cat: "Sandwiches", name: "Jus Fish Sandwich", price: 899, desc: "Crispy fish sandwich", img: "/menu/catfish-fries.png" },
-    { cat: "Sandwiches", name: "Cheeseburger", price: 799, desc: "Classic cheeseburger" },
-    { cat: "Sandwiches", name: "Double Cheeseburger", price: 1099, desc: "Double patty cheeseburger" },
+    { cat: "Sandwiches", name: "Cheeseburger", price: 799, desc: "Classic cheeseburger", img: "/menu/cheeseburger.png" },
+    { cat: "Sandwiches", name: "Double Cheeseburger", price: 1099, desc: "Double patty cheeseburger", img: "/menu/cheeseburger.png" },
 
     // Specialty Eggrolls
     { cat: "Specialty Eggrolls", name: "Alfredo Eggroll", price: 599, featured: true, desc: "Creamy alfredo chicken stuffed eggroll", img: "/menu/eggrolls.png" },
@@ -80,18 +80,18 @@ async function seed() {
     { cat: "Specialty Eggrolls", name: "Jerk Eggroll", price: 599, desc: "Jerk chicken stuffed eggroll", img: "/menu/eggrolls.png" },
 
     // Pizza
-    { cat: "Pizza", name: "Jerk Alfredo Pizza", price: 1799, desc: '14" pizza with jerk chicken and alfredo sauce' },
-    { cat: "Pizza", name: "Italian Beef Pizza", price: 1799, desc: '14" pizza loaded with Italian beef' },
-    { cat: "Pizza", name: "Buffalo Chicken Pizza", price: 1799, desc: '14" pizza with buffalo chicken' },
+    { cat: "Pizza", name: "Jerk Alfredo Pizza", price: 1799, desc: '14" pizza with jerk chicken and alfredo sauce', img: "/menu/jerk-pizza.png" },
+    { cat: "Pizza", name: "Italian Beef Pizza", price: 1799, desc: '14" pizza loaded with Italian beef', img: "/menu/jerk-pizza.png" },
+    { cat: "Pizza", name: "Buffalo Chicken Pizza", price: 1799, desc: '14" pizza with buffalo chicken', img: "/menu/buffalo-pizza.png" },
 
     // Specials
-    { cat: "Specials", name: "Fried Jerk Chicken Tacos (3pc)", price: 1099, desc: "3 crispy jerk chicken tacos" },
+    { cat: "Specials", name: "Fried Jerk Chicken Tacos (3pc)", price: 1099, desc: "3 crispy jerk chicken tacos", img: "/menu/jerk-tacos.png" },
     { cat: "Specials", name: "Pizza Puff", price: 399, desc: "Classic Chicago pizza puff", img: "/menu/pizza-puff.png" },
 
     // Sides & Drinks
-    { cat: "Sides & Drinks", name: "French Fries (Regular)", price: 399, desc: "Golden crispy french fries" },
-    { cat: "Sides & Drinks", name: "French Fries (Large)", price: 599, desc: "Large order of golden french fries" },
-    { cat: "Sides & Drinks", name: "Coleslaw", price: 299, desc: "Creamy coleslaw" },
+    { cat: "Sides & Drinks", name: "French Fries (Regular)", price: 399, desc: "Golden crispy french fries", img: "/menu/french-fries.png" },
+    { cat: "Sides & Drinks", name: "French Fries (Large)", price: 599, desc: "Large order of golden french fries", img: "/menu/french-fries.png" },
+    { cat: "Sides & Drinks", name: "Coleslaw", price: 299, desc: "Creamy coleslaw", img: "/menu/coleslaw.png" },
     { cat: "Sides & Drinks", name: "Can Soda", price: 150, desc: "Assorted can sodas" },
     { cat: "Sides & Drinks", name: "Bottle Water", price: 150, desc: "Bottled water" },
     { cat: "Sides & Drinks", name: "Juice", price: 250, desc: "Assorted juice" },
