@@ -1,9 +1,9 @@
 import type { Viewport } from "next";
-import { inter, spaceGrotesk, jetbrainsMono } from "@/lib/fonts";
+import { inter, oswald, jetbrainsMono } from "@/lib/fonts";
 import { createMetadata } from "@/lib/metadata";
 import { brand } from "@/config/brand";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
-import { OrganizationJsonLd, WebSiteJsonLd } from "@/components/seo/JsonLd";
+import { RestaurantJsonLd, WebSiteJsonLd } from "@/components/seo/JsonLd";
 import "./globals.css";
 
 export const metadata = createMetadata();
@@ -31,13 +31,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
+      className={`${inter.variable} ${oswald.variable} ${jetbrainsMono.variable}`}
       suppressHydrationWarning
       style={brandStyle}
     >
       <body className="min-h-screen bg-background text-foreground antialiased overflow-x-hidden">
         <ThemeProvider>
-          <OrganizationJsonLd />
+          <RestaurantJsonLd />
           <WebSiteJsonLd />
           {children}
         </ThemeProvider>
