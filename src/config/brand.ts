@@ -86,8 +86,8 @@ export const brand: BrandConfig = {
     city: "Chicago",
     state: "IL",
     zip: "60623",
-    lat: 41.8584,
-    lng: -87.7148,
+    lat: 41.85919,
+    lng: -87.71547,
   },
   hours: [
     { day: "Monday", open: "12:00 PM", close: "6:00 PM" },

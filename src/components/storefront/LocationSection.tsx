@@ -110,7 +110,7 @@ export function LocationSection() {
           >
             <div className="flex-1 min-h-[300px]">
               <iframe
-                src="https://www.openstreetmap.org/export/embed.html?bbox=-87.7198%2C41.8534%2C-87.7098%2C41.8634&layer=mapnik&marker=41.8584%2C-87.7148"
+                src={`https://www.openstreetmap.org/export/embed.html?bbox=${address.lng - 0.005}%2C${address.lat - 0.003}%2C${address.lng + 0.005}%2C${address.lat + 0.003}&layer=mapnik&marker=${address.lat}%2C${address.lng}`}
                 width="100%"
                 height="100%"
                 loading="lazy"
